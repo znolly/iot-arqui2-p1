@@ -54,7 +54,7 @@ def get_daily_summary_sensor1():
     fecha = result[0]
     cursor.execute("""
         SELECT 
-            ROUND(AVG(sensor1_temp), 2),
+            ROUND(AVG(sensor1_temp), 1),
             MIN(sensor1_temp),
             MAX(sensor1_temp)
         FROM sensor1
@@ -88,7 +88,7 @@ def get_daily_summary_sensor2():
     fecha = result[0]
     cursor.execute("""
         SELECT 
-            ROUND(AVG(sensor2_temp), 2),
+            ROUND(AVG(sensor2_temp), 1),
             MIN(sensor2_temp),
             MAX(sensor2_temp)
         FROM sensor2
