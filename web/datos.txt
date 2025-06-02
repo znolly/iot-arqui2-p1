@@ -1,0 +1,22 @@
+<?php
+require 'conexion.php';
+
+// Obtenemos la última temperatura de cada sensor
+$stmt = $pdo->query("
+    SELECT sensor, valor
+    FROM temperaturas
+    WHERE id IN (
+        SELECT MAX(id) FROM temperaturas GROUP BY sensor
+    )
+");
+
+$datos = [1 => null, 2 => null];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $datos[$row['sensor']] = (float)$row['valor'];
+}
+
+echo json_encode([
+    'temp1' => $datos[1],
+    'temp2' => $datos[2]
+]);
+?>
